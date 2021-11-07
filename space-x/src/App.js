@@ -7,11 +7,13 @@ import Container from "@mui/material/Container";
 import useStyles from './styles';
 import axios from 'axios';
 import useStateRef from 'react-usestateref';
+import Posts from './components/posts/Posts';
 
 export default function App() {
   const [year, setYear, yearRef] = useStateRef("");
   const [launch, setLaunch, launchRef] = useStateRef("");
   const [landing,setLanding, landingRef] = useStateRef("");
+  const [posts, setPosts, postsRef] = useStateRef();
   const classes = useStyles();	
   const navigate = useNavigate();
   const launchs = ["true","false"];
@@ -43,6 +45,7 @@ export default function App() {
     console.log(url);
     axios.get(baseurl + url).then((response) => {
       console.log(response.data);
+      setPosts(response.data);
     });
   },[year,launch,landing]);
 
@@ -72,6 +75,7 @@ export default function App() {
 
   return (
       <Container maxWidth="xl">
+        <Grid item xs={12} container justify="space-between" alignItems="stretch" spacing={3}>
           <Grid item xs={12} sm={3} >
             <Typography variant="h6" gutterBottom component="div">
                 Filters
@@ -134,7 +138,9 @@ export default function App() {
             </Grid>
           </Grid>
           <Grid item xs={12} sm={9}>
+            <Posts posts = {posts} />
           </Grid>
+        </Grid>
       </Container>
   );
 }
