@@ -141,6 +141,9 @@ export default function App() {
           <Grid item xs={12} md={9}>
             <Posts posts = {posts} />
           </Grid>
+          <Grid item xs = {12} >
+            <Typography variant="subtitle1" gutterBottom component="div" align="center"> Developer Name : Swapnil Guduru </Typography>
+          </Grid>
         </Grid>
       </Container>
   );
