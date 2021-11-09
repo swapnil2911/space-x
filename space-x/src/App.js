@@ -22,7 +22,7 @@ export default function App() {
   const years = ["2006","2007","2008","2009","2010","2011","2012","2013","2014", "2015", "2016", "2017","2018","2019","2020","2021"];
   
   const ChangeUrl = () => {
-    let url = "launches?limit=100";
+    let url = "?limit=100";
     
     if(yearRef.current !== "")
       url = url + "&launch_year=" + yearRef.current;
@@ -32,6 +32,11 @@ export default function App() {
       url = url + "&land_success=" + landingRef.current;
     navigate(url);
   }
+  
+  useEffect(() => {
+    window.addEventListener("beforeunload", navigate('/'));
+  
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   
   useEffect(() => {
     let baseurl = "https://api.spaceXdata.com/v3/";
